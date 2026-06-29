@@ -72,6 +72,19 @@
             display: block;
             filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
         }
+        /* Powered by Locanto স্টাইল */
+        .powered-by {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 8px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+        .powered-by span {
+            color: #ffcc00; /* Locanto-র থিম কালার অনুযায়ী হলুদ */
+            font-weight: 800;
+        }
         .text-line {
             font-weight: 900;
             text-transform: uppercase;
@@ -213,14 +226,15 @@
     <div class="content-container">
         <div class="logo-container">
             <img src="lgd1.webp" alt="Logo">
+            <div class="powered-by">Powered by <span>Locanto</span></div>
         </div>
 
         <h1 id="text1" class="text-line text-many-holes">Many Holes</h1>
         <h2 id="text2" class="text-line text-waiting">Waiting For You</h2>
         <div id="text3" class="text-line text-free">Free</div>
         
-        <!-- আকর্ষণীয় ম্যাচ বাটন -->
-        <button id="ctaBtn" class="cta-button">Match Free Fuck</button>
+        <!-- আপডেট করা বাটন টেক্সট -->
+        <button id="ctaBtn" class="cta-button">Get A Hole</button>
         
         <div id="loader" class="fake-buffer"></div>
     </div>
