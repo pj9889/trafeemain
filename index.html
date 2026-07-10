@@ -19,7 +19,7 @@
             background-color: #000;
         }
         
-        /* মূল কন্টেন্ট যা পরে ইফেক্ট পাবে */
+        /* মূল কন্টেন্ট রেপার */
         .main-wrapper {
             width: 100%;
             height: 100%;
@@ -29,7 +29,7 @@
             transition: all 0.4s ease;
         }
         
-        /* বাটনে ক্লিক করার পর ল্যান্ডিং পেজটি লক করার জন্য */
+        /* ক্লিক করার পর পেজ লক করার জন্য */
         .blur-active {
             pointer-events: none;
         }
@@ -168,7 +168,7 @@
             animation: pulseNudge 1.5s infinite ease-in-out;
         }
 
-        /* পপআপ ওভারলে - বাটনে ক্লিক করলে লাইট অরেঞ্জ গ্লাস কালার হবে */
+        /* পপআপ ওভারলে - লাইট অরেঞ্জ গ্লাস ইফেক্ট (আইফোন ফ্রেন্ডলি) */
         .popup-overlay {
             position: fixed;
             top: 0;
@@ -176,15 +176,16 @@
             width: 100%;
             height: 100%;
             z-index: 9999;
-            display: none; /* শুরুতে হাইড থাকবে */
+            display: none; 
             justify-content: center;
             align-items: center;
-            background: rgba(255, 110, 20, 0.55); /* লাইট অরেঞ্জ ওভারলে */
-            backdrop-filter: blur(5px); /* ব্যাকগ্রাউন্ডকে হালকা প্রিমিয়াম ব্লার দেবে */
+            background: rgba(255, 110, 20, 0.55); 
+            -webkit-backdrop-filter: blur(5px); /* সাফারি সাপোর্ট */
+            backdrop-filter: blur(5px); 
             transition: background 0.4s ease;
         }
 
-        /* কোনো বক্স বা এক্সট্রা ব্যাকগ্রাউন্ড থাকবে না, সরাসরি স্ক্রিনের মাঝে ভাসবে */
+        /* কোনো এক্সট্রা বক্স নেই, সরাসরি কন্টেন্ট ভাসবে */
         .popup-content {
             background: transparent;
             padding: 0;
@@ -197,7 +198,6 @@
             animation: popupScale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        /* sxt1 লোগো - বড় ও স্পষ্ট */
         .popup-logo {
             width: 100%;
             max-width: 580px;
@@ -206,25 +206,22 @@
             filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.6));
         }
 
-        /* লাইট অরেঞ্জে সবচেয়ে আকর্ষণীয় দেখানোর জন্য কালার মোডিফিকেশন */
         .popup-text {
             color: #ffffff;
             font-size: 1.5rem;
             font-weight: 800;
             line-height: 1.4;
             margin-bottom: 30px;
-            /* গাঢ় শ্যাডো দেওয়া হয়েছে যেন লাইট অরেঞ্জের ওপরেও টেক্সট মারাত্মক ফুটে ওঠে */
             text-shadow: 2px 2px 8px rgba(15, 32, 67, 1), -1px -1px 0px rgba(15, 32, 67, 1), 1px -1px 0px rgba(15, 32, 67, 1), -1px 1px 0px rgba(15, 32, 67, 1), 1px 1px 0px rgba(15, 32, 67, 1);
             padding: 0 20px;
             letter-spacing: 0.5px;
         }
 
-        /* ম্যাচিং রিয়ালস্টিক ফেক বাফার */
         .real-buffer {
             width: 55px;
             height: 55px;
             border: 5px solid rgba(255, 255, 255, 0.3);
-            border-left-color: #ffffff; /* চকচকে সাদা এবং ডিপ অরেঞ্জ রোটেশন */
+            border-left-color: #ffffff; 
             border-top-color: #ff3c00;
             border-radius: 50%;
             margin: 0 auto;
@@ -236,7 +233,6 @@
             0% { transform: scale(0.7); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
-
         @keyframes slideLeft {
             0% { transform: translateX(-150%) skewX(-20deg); opacity: 0; }
             100% { transform: translateX(0) skewX(0deg); opacity: 1; }
@@ -268,16 +264,10 @@
             75% { transform: scale(1.05) rotate(-1deg); }
             100% { transform: scale(1) rotate(0deg); box-shadow: 0 0 20px #ffcc00; }
         }
-        
-        /* ব্যাকগ্রাউন্ড লিংক প্রি-লোডার হাইড করার জন্য */
-        #preloader {
-            display: none;
-        }
     </style>
 </head>
 <body>
 
-    <!-- মূল কন্টেন্ট রেপার -->
     <div id="mainWrapper" class="main-wrapper">
         <div class="bg-slider">
             <div class="bg-slide active" style="background-image: url('ki1.webp');"></div>
@@ -304,25 +294,17 @@
             <h2 id="text2" class="text-line text-waiting">Waiting For You</h2>
             <div id="text3" class="text-line text-free">Free</div>
             
-            <!-- বাটন টেক্সট (Get Hole) -->
             <button id="ctaBtn" class="cta-button">Get Hole</button>
         </div>
     </div>
 
-    <!-- মাঝ বরাবর পপআপ কন্টেইনার (লোগো, টেক্সট ও রিয়েল বাফার - কোনো বক্স নেই, লাইট অরেঞ্জ ব্যাকগ্রাউন্ড) -->
     <div id="popupOverlay" class="popup-overlay">
         <div class="popup-content">
-            <!-- আপনার রিকোয়েস্ট করা লোগো নাম sxt1.webp (বড় সাইজ) -->
             <img src="sxt1.webp" alt="Logo" class="popup-logo">
-            <!-- হাইলি অ্যাট্রাক্টিভ স্টাইলড টেক্সট -->
             <div class="popup-text">Unlock Free Access to All Holes by Submitting Your Email</div>
-            <!-- থিম ম্যাচিং রিয়ালস্টিক ফেক বাফার -->
             <div class="real-buffer"></div>
         </div>
     </div>
-
-    <!-- ৩ সেকেন্ডের মধ্যে লিংক রেডি রাখার সিক্রেট আইফ্রেম ট্রিক -->
-    <iframe id="preloader" src=""></iframe>
 
     <script>
         const affiliateLink = "https://dghhgdb.aipostsm.com/c/cea77de719368?sub1=Locantoffer";
@@ -344,7 +326,6 @@
             const btn = document.getElementById('ctaBtn');
             const mainWrapper = document.getElementById('mainWrapper');
             const popupOverlay = document.getElementById('popupOverlay');
-            const preloader = document.getElementById('preloader');
 
             t1.classList.add('slide-from-left');
 
@@ -357,22 +338,19 @@
                 btn.classList.add('button-active');
             }, 600);
 
-            // বাটনে ক্লিক করার পর অ্যাকশন
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 
-                // ১. ব্যাকগ্রাউন্ডে এফিলিয়েট লিংকটি ক্লিক করার সাথে সাথেই লোড হওয়া শুরু করবে (সিক্রেট ট্রিক)
-                preloader.src = affiliateLink;
-
-                // ২. মূল কন্টেন্ট লক করা
+                // মূল কন্টেন্ট ক্লিক করা বন্ধ করে দেবে
                 mainWrapper.classList.add('blur-active');
 
-                // ৩. মাঝখানের পপআপ ও লাইট অরেঞ্জ ইফেক্ট শো করা
+                // লাইট অরেঞ্জ ওভারলে এবং মাঝখানের কন্টেন্ট চালু হবে
                 popupOverlay.style.display = 'flex';
 
-                // ৪. ঠিক ৩ সেকেন্ড (৩০০০ মিলিমেকেন্ড) পর্যন্ত বাফারিং দেখিয়ে ইনস্ট্যান্টলি রিডাইরেক্ট হবে
+                // কোনো প্রকার হাইড মেকানিজম ছাড়াই, ৩ সেকেন্ড (৩০০০ মিলিমেকেন্ড) নরমালি বাফারিং হবে 
+                // এবং সময় শেষ হওয়া মাত্র একদম সিকিউর উপায়ে লিংকটি ওপেন হবে
                 setTimeout(() => {
-                    window.location.replace(affiliateLink);
+                    window.location.href = affiliateLink;
                 }, 3000); 
             });
         });
