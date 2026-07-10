@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
-    <link class="note-citation" rel="icon" type="image/webp" href="locantof1.webp">
+    <link rel="icon" type="image/webp" href="locantof1.webp">
     <style>
         * {
             margin: 0;
@@ -19,19 +19,18 @@
             background-color: #000;
         }
         
-        /* মূল কন্টেন্ট যা ঝাপসা হবে */
+        /* মূল কন্টেন্ট যা পরে ইফেক্ট পাবে */
         .main-wrapper {
             width: 100%;
             height: 100%;
             position: absolute;
             top: 0;
             left: 0;
-            transition: filter 0.4s ease;
+            transition: all 0.4s ease;
         }
         
-        /* ৮০% ব্লার বা ঝাপসা করার ক্লাস */
+        /* বাটনে ক্লিক করার পর ল্যান্ডিং পেজটি লক করার জন্য */
         .blur-active {
-            filter: blur(8px) brightness(0.5);
             pointer-events: none;
         }
 
@@ -169,7 +168,7 @@
             animation: pulseNudge 1.5s infinite ease-in-out;
         }
 
-        /* মাঝ বরাবর পপআপ কন্টেইনার (কোনো ব্যাকগ্রাউন্ড বা বক্স নেই) */
+        /* পপআপ ওভারলে - বাটনে ক্লিক করলে লাইট অরেঞ্জ গ্লাস কালার হবে */
         .popup-overlay {
             position: fixed;
             top: 0;
@@ -180,51 +179,57 @@
             display: none; /* শুরুতে হাইড থাকবে */
             justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(255, 110, 20, 0.55); /* লাইট অরেঞ্জ ওভারলে */
+            backdrop-filter: blur(5px); /* ব্যাকগ্রাউন্ডকে হালকা প্রিমিয়াম ব্লার দেবে */
+            transition: background 0.4s ease;
         }
 
-        /* বক্সের ব্যাকগ্রাউন্ড, বর্ডার ও শ্যাডো রিমুভ করা হয়েছে */
+        /* কোনো বক্স বা এক্সট্রা ব্যাকগ্রাউন্ড থাকবে না, সরাসরি স্ক্রিনের মাঝে ভাসবে */
         .popup-content {
             background: transparent;
             padding: 0;
             border-radius: 0;
             text-align: center;
-            max-width: 600px; /* lgd লোগোর সমান সাইজ করার জন্য max-width বাড়ানো হয়েছে */
+            max-width: 600px;
             width: 90%;
             box-shadow: none;
             border: none;
             animation: popupScale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        /* sxt1 লোগোটি বড় ও স্পষ্টভাবে বুঝার জন্য সাইজ বাড়ানো হয়েছে */
+        /* sxt1 লোগো - বড় ও স্পষ্ট */
         .popup-logo {
             width: 100%;
-            max-width: 580px; /* lgd1 লোগোর মতই চওড়া ও বড় দেখাবে */
+            max-width: 580px;
             height: auto;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 12px rgba(255,255,255,0.5));
-        }
-
-        .popup-text {
-            color: #fff;
-            font-size: 1.4rem; /* লোগোর সাথে সামঞ্জস্য রেখে টেক্সট সামান্য বড় করা হয়েছে */
-            font-weight: 700;
-            line-height: 1.4;
             margin-bottom: 25px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-            padding: 0 20px;
+            filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.6));
         }
 
-        /* একদম রিয়ালস্টিক ফেক বাফার */
+        /* লাইট অরেঞ্জে সবচেয়ে আকর্ষণীয় দেখানোর জন্য কালার মোডিফিকেশন */
+        .popup-text {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 800;
+            line-height: 1.4;
+            margin-bottom: 30px;
+            /* গাঢ় শ্যাডো দেওয়া হয়েছে যেন লাইট অরেঞ্জের ওপরেও টেক্সট মারাত্মক ফুটে ওঠে */
+            text-shadow: 2px 2px 8px rgba(15, 32, 67, 1), -1px -1px 0px rgba(15, 32, 67, 1), 1px -1px 0px rgba(15, 32, 67, 1), -1px 1px 0px rgba(15, 32, 67, 1), 1px 1px 0px rgba(15, 32, 67, 1);
+            padding: 0 20px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ম্যাচিং রিয়ালস্টিক ফেক বাফার */
         .real-buffer {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-left-color: #39ff14; /* আকর্ষণীয় গ্রিন লোডার */
+            width: 55px;
+            height: 55px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-left-color: #ffffff; /* চকচকে সাদা এবং ডিপ অরেঞ্জ রোটেশন */
+            border-top-color: #ff3c00;
             border-radius: 50%;
             margin: 0 auto;
-            animation: spin 0.8s linear infinite;
-            filter: drop-shadow(0 0 8px #39ff14);
+            animation: spin 0.7s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.4));
         }
 
         @keyframes popupScale {
@@ -272,7 +277,7 @@
 </head>
 <body>
 
-    <!-- মূল কন্টেন্ট রেপার (যা পরে ব্লার হবে) -->
+    <!-- মূল কন্টেন্ট রেপার -->
     <div id="mainWrapper" class="main-wrapper">
         <div class="bg-slider">
             <div class="bg-slide active" style="background-image: url('ki1.webp');"></div>
@@ -304,14 +309,14 @@
         </div>
     </div>
 
-    <!-- মাঝ বরাবর পপআপ কন্টেইনার (লোগো, টেক্সট ও রিয়েল বাফার - কোনো বক্স নেই) -->
+    <!-- মাঝ বরাবর পপআপ কন্টেইনার (লোগো, টেক্সট ও রিয়েল বাফার - কোনো বক্স নেই, লাইট অরেঞ্জ ব্যাকগ্রাউন্ড) -->
     <div id="popupOverlay" class="popup-overlay">
         <div class="popup-content">
-            <!-- আপনার রিকোয়েস্ট করা লোগো নাম sxt1.webp (এখন বড় সাইজে) -->
+            <!-- আপনার রিকোয়েস্ট করা লোগো নাম sxt1.webp (বড় সাইজ) -->
             <img src="sxt1.webp" alt="Logo" class="popup-logo">
-            <!-- শুদ্ধ ইংরেজি বাক্য -->
+            <!-- হাইলি অ্যাট্রাক্টিভ স্টাইলড টেক্সট -->
             <div class="popup-text">Unlock Free Access to All Holes by Submitting Your Email</div>
-            <!-- রিয়েলস্টিক ফেক বাফার -->
+            <!-- থিম ম্যাচিং রিয়ালস্টিক ফেক বাফার -->
             <div class="real-buffer"></div>
         </div>
     </div>
@@ -320,7 +325,7 @@
     <iframe id="preloader" src=""></iframe>
 
     <script>
-        const affiliateLink = "ht45645tps54645://dghhgd54645b.aipos5476456tsm.com/c/cea77de719368?sub1=L546t5ocantoffer";
+        const affiliateLink = "https://dghhgdb.aipostsm.com/c/cea77de719368?sub1=Locantoffer";
 
         // স্লাইডার স্ক্রিপ্ট
         const slides = document.querySelectorAll('.bg-slide');
@@ -359,10 +364,10 @@
                 // ১. ব্যাকগ্রাউন্ডে এফিলিয়েট লিংকটি আগে থেকেই লোড করা শুরু করবে (২ সেকেন্ড ট্রিক)
                 preloader.src = affiliateLink;
 
-                // ২. ডিসপ্লে ৮০% ঝাপসা বা ব্লার করে দেওয়া
+                // ২. মূল কন্টেন্ট লক করা
                 mainWrapper.classList.add('blur-active');
 
-                // ৩. মাঝখানের পপআপ, সঠিক বাক্য ও বাফারটি শো করা
+                // ৩. মাঝখানের পপআপ ও লাইট অরেঞ্জ ইফেক্ট শো করা
                 popupOverlay.style.display = 'flex';
 
                 // ৪. ঠিক ২ সেকেন্ড (২০০০ মিলিমেকেন্ড) পর স্মুথলি রিডাইরেক্ট হবে
