@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
-    <link rel="icon" type="image/webp" href="locantof1.webp">
+    <link class="note-citation" rel="icon" type="image/webp" href="locantof1.webp">
     <style>
         * {
             margin: 0;
@@ -189,27 +189,30 @@
             padding: 0;
             border-radius: 0;
             text-align: center;
-            max-width: 450px;
+            max-width: 600px; /* lgd লোগোর সমান সাইজ করার জন্য max-width বাড়ানো হয়েছে */
             width: 90%;
             box-shadow: none;
             border: none;
             animation: popupScale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
+        /* sxt1 লোগোটি বড় ও স্পষ্টভাবে বুঝার জন্য সাইজ বাড়ানো হয়েছে */
         .popup-logo {
-            width: 160px;
+            width: 100%;
+            max-width: 580px; /* lgd1 লোগোর মতই চওড়া ও বড় দেখাবে */
             height: auto;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
+            filter: drop-shadow(0 0 12px rgba(255,255,255,0.5));
         }
 
         .popup-text {
             color: #fff;
-            font-size: 1.3rem;
+            font-size: 1.4rem; /* লোগোর সাথে সামঞ্জস্য রেখে টেক্সট সামান্য বড় করা হয়েছে */
             font-weight: 700;
             line-height: 1.4;
             margin-bottom: 25px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            padding: 0 20px;
         }
 
         /* একদম রিয়ালস্টিক ফেক বাফার */
@@ -304,7 +307,7 @@
     <!-- মাঝ বরাবর পপআপ কন্টেইনার (লোগো, টেক্সট ও রিয়েল বাফার - কোনো বক্স নেই) -->
     <div id="popupOverlay" class="popup-overlay">
         <div class="popup-content">
-            <!-- আপনার রিকোয়েস্ট করা লোগো নাম sxt1.webp -->
+            <!-- আপনার রিকোয়েস্ট করা লোগো নাম sxt1.webp (এখন বড় সাইজে) -->
             <img src="sxt1.webp" alt="Logo" class="popup-logo">
             <!-- শুদ্ধ ইংরেজি বাক্য -->
             <div class="popup-text">Unlock Free Access to All Holes by Submitting Your Email</div>
