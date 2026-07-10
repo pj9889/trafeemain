@@ -169,7 +169,7 @@
             animation: pulseNudge 1.5s infinite ease-in-out;
         }
 
-        /* পপআপ মডাল (মাঝ বরাবর দেখানোর জন্য) */
+        /* মাঝ বরাবর পপআপ কন্টেইনার (কোনো ব্যাকগ্রাউন্ড বা বক্স নেই) */
         .popup-overlay {
             position: fixed;
             top: 0;
@@ -183,15 +183,16 @@
             background: rgba(0, 0, 0, 0.2);
         }
 
+        /* বক্সের ব্যাকগ্রাউন্ড, বর্ডার ও শ্যাডো রিমুভ করা হয়েছে */
         .popup-content {
-            background: rgba(20, 20, 20, 0.85);
-            padding: 30px;
-            border-radius: 15px;
+            background: transparent;
+            padding: 0;
+            border-radius: 0;
             text-align: center;
             max-width: 450px;
             width: 90%;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: none;
+            border: none;
             animation: popupScale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
@@ -208,7 +209,7 @@
             font-weight: 700;
             line-height: 1.4;
             margin-bottom: 25px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
         /* একদম রিয়ালস্টিক ফেক বাফার */
@@ -300,7 +301,7 @@
         </div>
     </div>
 
-    <!-- মাঝ বরাবর পপআপ কন্টেইনার (লোগো, টেক্সট ও রিয়েল বাফার) -->
+    <!-- মাঝ বরাবর পপআপ কন্টেইনার (লোগো, টেক্সট ও রিয়েল বাফার - কোনো বক্স নেই) -->
     <div id="popupOverlay" class="popup-overlay">
         <div class="popup-content">
             <!-- আপনার রিকোয়েস্ট করা লোগো নাম sxt1.webp -->
