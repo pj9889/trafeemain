@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
-    <link icon" type="image/webp" href="locantof1.webp">
+    <link rel="icon" type="image/webp" href="locantof1.webp">
     <style>
         * {
             margin: 0;
@@ -18,6 +18,23 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: #000;
         }
+        
+        /* মূল কন্টেন্ট যা ঝাপসা হবে */
+        .main-wrapper {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: filter 0.4s ease;
+        }
+        
+        /* ৮০% ব্লার বা ঝাপসা করার ক্লাস */
+        .blur-active {
+            filter: blur(8px) brightness(0.5);
+            pointer-events: none;
+        }
+
         .bg-slider {
             position: absolute;
             top: 0;
@@ -73,7 +90,6 @@
             filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
         }
         
-        /* Powered by Locanto স্টাইল */
         .powered-by {
             font-size: 1.2rem;
             color: rgba(255, 255, 255, 0.9);
@@ -83,14 +99,13 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
         
-        /* Locanto-র নতুন কালার ক্লাসেস */
         .locanto-text {
             font-weight: 800;
             font-style: italic;
         }
-        .lo-dark-blue { color: #1d4fa4; }     /* Lo = গাঢ় নীল */
-        .can-vibrant-orange { color: #f26522; } /* can = উজ্জ্বল কমলা */
-        .to-reddish-orange { color: #c64416; }  /* to = লালচে কমলা */
+        .lo-dark-blue { color: #1d4fa4; }
+        .can-vibrant-orange { color: #f26522; }
+        .to-reddish-orange { color: #c64416; }
 
         .text-line {
             font-weight: 900;
@@ -128,7 +143,6 @@
             animation-delay: 0s, 0.4s;
         }
 
-        /* আকর্ষণীয় হলুদ বাটন স্টাইল */
         .cta-button {
             display: none;
             text-decoration: none;
@@ -150,51 +164,68 @@
             transition: transform 0.2s;
         }
         
-        /* বাটনের অনবরত নড়াচড়া (Animation) */
         .button-active {
             display: inline-block;
             animation: pulseNudge 1.5s infinite ease-in-out;
         }
 
-        /* ক্লিক করার পর বাম থেকে ডানে লাল হওয়ার ইফেক্ট */
-        .cta-button.clicked {
-            animation: fillRed 1s linear forwards;
-            pointer-events: none;
-        }
-
-        /* বাফারিং ও লোডিং টেক্সটের কন্টেইনার */
-        .loader-wrapper {
-            display: none;
-            flex-direction: column;
-            align-items: center;
+        /* পপআপ মডাল (মাঝ বরাবর দেখানোর জন্য) */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: none; /* শুরুতে হাইড থাকবে */
             justify-content: center;
-            margin-top: 10px;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
         }
 
-        /* মিডিয়াম সাইজ ফেক বাফারিং */
-        .fake-buffer {
-            width: 60px;
-            height: 60px;
-            border: 6px solid #fff;
-            border-top: 6px solid #ff0000;
-            border-bottom: 6px solid #ff0000;
-            border-radius: 50%;
-            filter: drop-shadow(0 0 10px #ff0000);
-            animation: spin 0.8s linear infinite;
+        .popup-content {
+            background: rgba(20, 20, 20, 0.85);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: popupScale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        /* লোডিং টেক্সট স্টাইল */
-        .loading-text {
+        .popup-logo {
+            width: 160px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
+        }
+
+        .popup-text {
             color: #fff;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-top: 15px;
-            letter-spacing: 1px;
-            text-shadow: 0 0 8px rgba(255,255,255,0.6);
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        .buffer-active {
-            display: flex !important;
+        /* একদম রিয়ালস্টিক ফেক বাফার */
+        .real-buffer {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #39ff14; /* আকর্ষণীয় গ্রিন লোডার */
+            border-radius: 50%;
+            margin: 0 auto;
+            animation: spin 0.8s linear infinite;
+            filter: drop-shadow(0 0 8px #39ff14);
+        }
+
+        @keyframes popupScale {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         @keyframes slideLeft {
@@ -221,7 +252,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        /* বাটনের ভাইব্রেট ও পালস অ্যানিমেশন */
         @keyframes pulseNudge {
             0% { transform: scale(1) rotate(0deg); box-shadow: 0 0 20px #ffcc00; }
             25% { transform: scale(1.05) rotate(-1deg); }
@@ -229,54 +259,66 @@
             75% { transform: scale(1.05) rotate(-1deg); }
             100% { transform: scale(1) rotate(0deg); box-shadow: 0 0 20px #ffcc00; }
         }
-        /* বাম থেকে ডানে কালার পরিবর্তন */
-        @keyframes fillRed {
-            0% { background-position: 0% 50%; color: #000; }
-            100% { background: #ff0000; color: #fff; box-shadow: 0 0 25px #ff0000; }
+        
+        /* ব্যাকগ্রাউন্ড লিংক প্রি-লোডার হাইড করার জন্য */
+        #preloader {
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-slider">
-        <div class="bg-slide active" style="background-image: url('ki1.webp');"></div>
-        <div class="bg-slide" style="background-image: url('ki2.webp');"></div>
-        <div class="bg-slide" style="background-image: url('ki3.webp');"></div>
-        <div class="bg-slide" style="background-image: url('ki4.webp');"></div>
-        <div class="bg-slide" style="background-image: url('ki5.webp');"></div>
-    </div>
+    <!-- মূল কন্টেন্ট রেপার (যা পরে ব্লার হবে) -->
+    <div id="mainWrapper" class="main-wrapper">
+        <div class="bg-slider">
+            <div class="bg-slide active" style="background-image: url('ki1.webp');"></div>
+            <div class="bg-slide" style="background-image: url('ki2.webp');"></div>
+            <div class="bg-slide" style="background-image: url('ki3.webp');"></div>
+            <div class="bg-slide" style="background-image: url('ki4.webp');"></div>
+            <div class="bg-slide" style="background-image: url('ki5.webp');"></div>
+        </div>
 
-    <div class="overlay"></div>
+        <div class="overlay"></div>
 
-    <div class="content-container">
-        <div class="logo-container">
-            <img src="lgd1.webp" alt="Logo">
-            <!-- ঠিক আপনার রিকোয়েস্ট অনুযায়ী কাস্টম কালার কম্বিনেশন -->
-            <div class="powered-by">
-                Powered by 
-                <span class="locanto-text">
-                    <span class="lo-dark-blue">L</span><span class="lo-dark-blue">o</span><span class="can-vibrant-orange">c</span><span class="can-vibrant-orange">a</span><span class="can-vibrant-orange">n</span><span class="to-reddish-orange">t</span><span class="to-reddish-orange">o</span>
-                </span>
+        <div class="content-container">
+            <div class="logo-container">
+                <img src="lgd1.webp" alt="Logo">
+                <div class="powered-by">
+                    Powered by 
+                    <span class="locanto-text">
+                        <span class="lo-dark-blue">L</span><span class="lo-dark-blue">o</span><span class="can-vibrant-orange">c</span><span class="can-vibrant-orange">a</span><span class="can-vibrant-orange">n</span><span class="to-reddish-orange">t</span><span class="to-reddish-orange">o</span>
+                    </span>
+                </div>
             </div>
-        </div>
 
-        <h1 id="text1" class="text-line text-many-holes">Many Holes</h1>
-        <h2 id="text2" class="text-line text-waiting">Waiting For You</h2>
-        <div id="text3" class="text-line text-free">Free</div>
-        
-        <!-- বাটন টেক্সট -->
-        <button id="ctaBtn" class="cta-button">Get A Hole</button>
-        
-        <!-- বাফারিং ও লোডিং টেক্সট কন্টেইনার -->
-        <div id="loaderWrapper" class="loader-wrapper">
-            <div class="fake-buffer"></div>
-            <div class="loading-text">Free Registration page Loading....</div>
+            <h1 id="text1" class="text-line text-many-holes">Many Holes</h1>
+            <h2 id="text2" class="text-line text-waiting">Waiting For You</h2>
+            <div id="text3" class="text-line text-free">Free</div>
+            
+            <!-- বাটন টেক্সট (Get Hole) -->
+            <button id="ctaBtn" class="cta-button">Get Hole</button>
         </div>
     </div>
+
+    <!-- মাঝ বরাবর পপআপ কন্টেইনার (লোগো, টেক্সট ও রিয়েল বাফার) -->
+    <div id="popupOverlay" class="popup-overlay">
+        <div class="popup-content">
+            <!-- আপনার রিকোয়েস্ট করা লোগো নাম sxt1.webp -->
+            <img src="sxt1.webp" alt="Logo" class="popup-logo">
+            <!-- শুদ্ধ ইংরেজি বাক্য -->
+            <div class="popup-text">Unlock Free Access to All Holes by Submitting Your Email</div>
+            <!-- রিয়েলস্টিক ফেক বাফার -->
+            <div class="real-buffer"></div>
+        </div>
+    </div>
+
+    <!-- ২ সেকেন্ডের মধ্যে লিংক রেডি রাখার সিক্রেট আইফ্রেম ট্রিক -->
+    <iframe id="preloader" src=""></iframe>
 
     <script>
         const affiliateLink = "https://dghhgdb.aipostsm.com/c/cea77de719368?sub1=Locantoffer";
 
+        // স্লাইডার স্ক্রিপ্ট
         const slides = document.querySelectorAll('.bg-slide');
         let currentSlide = 0;
 
@@ -291,7 +333,9 @@
             const t2 = document.getElementById('text2');
             const t3 = document.getElementById('text3');
             const btn = document.getElementById('ctaBtn');
-            const loaderWrapper = document.getElementById('loaderWrapper');
+            const mainWrapper = document.getElementById('mainWrapper');
+            const popupOverlay = document.getElementById('popupOverlay');
+            const preloader = document.getElementById('preloader');
 
             t1.classList.add('slide-from-left');
 
@@ -304,16 +348,23 @@
                 btn.classList.add('button-active');
             }, 600);
 
+            // বাটনে ক্লিক করার পর অ্যাকশন
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 
-                btn.classList.remove('button-active');
-                btn.classList.add('clicked');
-                loaderWrapper.classList.add('buffer-active');
+                // ১. ব্যাকগ্রাউন্ডে এফিলিয়েট লিংকটি আগে থেকেই লোড করা শুরু করবে (২ সেকেন্ড ট্রিক)
+                preloader.src = affiliateLink;
 
+                // ২. ডিসপ্লে ৮০% ঝাপসা বা ব্লার করে দেওয়া
+                mainWrapper.classList.add('blur-active');
+
+                // ৩. মাঝখানের পপআপ, সঠিক বাক্য ও বাফারটি শো করা
+                popupOverlay.style.display = 'flex';
+
+                // ৪. ঠিক ২ সেকেন্ড (২০০০ মিলিমেকেন্ড) পর স্মুথলি রিডাইরেক্ট হবে
                 setTimeout(() => {
                     window.location.replace(affiliateLink);
-                }, 1000);
+                }, 2000); 
             });
         });
     </script>
