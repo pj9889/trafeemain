@@ -11,21 +11,27 @@
             padding: 0;
             box-sizing: border-box;
         }
+        /* পুরো পিসির ব্যাকগ্রাউন্ড কালো থাকবে */
         body, html {
             width: 100%;
             height: 100%;
             overflow: hidden;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
+        /* এই রেপারটি পিসিতে মোবাইলের মতো শেপ দেবে এবং মোবাইলে ফুল স্ক্রিন হবে */
         .main-wrapper {
             width: 100%;
             height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: all 0.4s ease;
+            max-width: 480px; /* পিসিতে সর্বোচ্চ মোবাইলের মতো চওড়া হবে */
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.1); /* পিসিতে দেখতে সুন্দর লাগার জন্য হালকা শ্যাডো */
+            background-color: #000;
         }
 
         .bg-slider {
@@ -69,10 +75,11 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            padding: 0 15px;
         }
         .logo-container {
             width: 100%;
-            max-width: 600px;
+            max-width: 100%;
             margin-bottom: 25px;
             padding: 0 20px;
         }
@@ -84,7 +91,7 @@
         }
         
         .powered-by {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: rgba(255, 255, 255, 0.9);
             margin-top: 10px;
             font-weight: 600;
@@ -109,7 +116,7 @@
             opacity: 0;
         }
         .text-many-holes {
-            font-size: clamp(3.5rem, 8vw, 6rem);
+            font-size: clamp(3rem, 12vw, 4.5rem);
             color: #fff;
             text-shadow: 0 0 10px #ff0055, 0 0 20px #ff0055, 0 0 40px #ff0055;
         }
@@ -117,7 +124,7 @@
             animation: slideLeft 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
         .text-waiting {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-size: clamp(2.2rem, 8vw, 3.5rem);
             color: #00ffff;
             text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
         }
@@ -125,7 +132,7 @@
             animation: slideRight 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
         .text-free {
-            font-size: clamp(4rem, 10vw, 8rem);
+            font-size: clamp(3.5rem, 14vw, 5.5rem);
             color: #39ff14;
             text-shadow: 0 0 15px #39ff14, 0 0 30px #39ff14, 0 0 60px #39ff14;
             margin-bottom: 15px;
@@ -140,7 +147,7 @@
             display: none;
             text-decoration: none;
             padding: 15px 40px;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-size: clamp(1.3rem, 6vw, 2rem);
             font-weight: 900;
             text-transform: uppercase;
             color: #000;
@@ -155,6 +162,7 @@
             z-index: 10;
             margin-bottom: 20px;
             transition: transform 0.2s;
+            width: 85%; /* বাটনের উইডথ মোবাইলের সাথে মানানসই করা হয়েছে */
         }
         
         .button-active {
@@ -193,6 +201,7 @@
 </head>
 <body>
 
+    <!-- এটি এখন পিসি এবং ল্যাপটপেও ওপর-নিচ ফুল স্ক্রিন থাকবে কিন্তু পাশে কাটবে না -->
     <div id="mainWrapper" class="main-wrapper">
         <div class="bg-slider">
             <div class="bg-slide active" style="background-image: url('ki1.webp');"></div>
@@ -255,8 +264,7 @@
 
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                
-                // সরাসরি উইন্ডো রিডাইরেকশন (কোনো পপআপ বা বাফারিং স্ক্রিন ছাড়া)
+                // সরাসরি এফিলিয়েট লিংক ওপেন (নো ফেক বাফারিং)
                 window.location.href = affiliateLink;
             });
         });
