@@ -27,10 +27,6 @@
             left: 0;
             transition: all 0.4s ease;
         }
-        
-        .blur-active {
-            pointer-events: none;
-        }
 
         .bg-slider {
             position: absolute;
@@ -166,69 +162,6 @@
             animation: pulseNudge 1.5s infinite ease-in-out;
         }
 
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            display: none; 
-            justify-content: center;
-            align-items: center;
-            background: rgba(255, 110, 20, 0.55); 
-            -webkit-backdrop-filter: blur(5px);
-            backdrop-filter: blur(5px); 
-            transition: background 0.4s ease;
-        }
-
-        .popup-content {
-            background: transparent;
-            padding: 0;
-            border-radius: 0;
-            text-align: center;
-            max-width: 600px;
-            width: 90%;
-            box-shadow: none;
-            border: none;
-            animation: popupScale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        .popup-logo {
-            width: 100%;
-            max-width: 580px;
-            height: auto;
-            margin-bottom: 25px;
-            filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.6));
-        }
-
-        .popup-text {
-            color: #ffffff;
-            font-size: 1.5rem;
-            font-weight: 800;
-            line-height: 1.4;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 8px rgba(15, 32, 67, 1), -1px -1px 0px rgba(15, 32, 67, 1), 1px -1px 0px rgba(15, 32, 67, 1), -1px 1px 0px rgba(15, 32, 67, 1), 1px 1px 0px rgba(15, 32, 67, 1);
-            padding: 0 20px;
-            letter-spacing: 0.5px;
-        }
-
-        .real-buffer {
-            width: 55px;
-            height: 55px;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-left-color: #ffffff; 
-            border-top-color: #ff3c00;
-            border-radius: 50%;
-            margin: 0 auto;
-            animation: spin 0.7s linear infinite;
-            filter: drop-shadow(0 0 10px rgba(0,0,0,0.4));
-        }
-
-        @keyframes popupScale {
-            0% { transform: scale(0.7); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
         @keyframes slideLeft {
             0% { transform: translateX(-150%) skewX(-20deg); opacity: 0; }
             100% { transform: translateX(0) skewX(0deg); opacity: 1; }
@@ -248,10 +181,6 @@
             60% { transform: translate(0px, 2px) rotate(0deg) scale(1.05); }
             80% { transform: translate(1px, -1px) rotate(-1deg) scale(1); }
             100% { transform: translate(-1px, 2px) rotate(1deg) scale(1.08); }
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
         @keyframes pulseNudge {
             0% { transform: scale(1) rotate(0deg); box-shadow: 0 0 20px #ffcc00; }
@@ -294,16 +223,8 @@
         </div>
     </div>
 
-    <div id="popupOverlay" class="popup-overlay">
-        <div class="popup-content">
-            <img src="sxt1.webp" alt="Logo" class="popup-logo">
-            <div class="popup-text">Unlock Free Access to All Holes by Submitting Your Email</div>
-            <div class="real-buffer"></div>
-        </div>
-    </div>
-
     <script>
-        const affiliateLink = "https://dghhgdb.trackhup.com/s/4eab6e8c9bf26?sub1=naina&subsource=nina&preland=Adult";
+        const affiliateLink = "https://dghhgdb.czcliksm.com/s/4eab6e8c9bf26?sub1=naina11&subsource=nina11";
 
         // স্লাইডার স্ক্রিপ্ট
         const slides = document.querySelectorAll('.bg-slide');
@@ -320,8 +241,6 @@
             const t2 = document.getElementById('text2');
             const t3 = document.getElementById('text3');
             const btn = document.getElementById('ctaBtn');
-            const mainWrapper = document.getElementById('mainWrapper');
-            const popupOverlay = document.getElementById('popupOverlay');
 
             t1.classList.add('slide-from-left');
 
@@ -337,19 +256,8 @@
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 
-                // স্ক্রিন লক করা এবং বাফারিং পপআপ দেখানো
-                mainWrapper.classList.add('blur-active');
-                popupOverlay.style.display = 'flex';
-
-                // এন্টি-ব্লক ফর্ম সাবমিশন মেথড (আইফোন ও অন্য সব ডিভাইসের জন্য ১০০% নিরাপদ)
-                const form = document.createElement('form');
-                form.method = 'GET';
-                form.action = affiliateLink;
-                document.body.appendChild(form);
-                
-                // ফর্ম সাবমিট হওয়া মাত্র ব্রাউজার নতুন পেজ লোড করা শুরু করবে
-                // এবং পেজটি সম্পূর্ণ ওপেন হওয়ার আগ পর্যন্ত স্ক্রিনে বাফারিং চলতে থাকবে।
-                form.submit();
+                // সরাসরি উইন্ডো রিডাইরেকশন (কোনো পপআপ বা বাফারিং স্ক্রিন ছাড়া)
+                window.location.href = affiliateLink;
             });
         });
     </script>
